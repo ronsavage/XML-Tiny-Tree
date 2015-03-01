@@ -19,8 +19,7 @@ diag "Processing $input_file";
 
 ok($tag eq 'tag_1', 'Root tag name (tag_1)'); $count++;
 
-my(@children) = $tree -> children;
-
+my(@children)   = $tree -> children;
 $tag            = $children[0] -> value;
 $meta           = $children[0] -> meta;
 my($attr_value) = $$meta{attributes}{attr_2_name};
@@ -32,9 +31,9 @@ ok($attr_value eq 'attr_2_value', 'First child attr value (attr_2_value)'); $cou
 
 $tag        = $children[0] -> value;
 $meta       = $children[0] -> meta;
-$attr_value = $$meta{attributes}{attr_4_name};
+$attr_value = $$meta{attributes}{attr_4_name_1};
 
-ok($tag        eq 'tag_4',        "Second child's first child tag name (tag_4)");          $count++;
-ok($attr_value eq 'attr_4_value', "Second child's first child attr value (attr_4_value)"); $count++;
+ok($tag        eq 'tag_4',        "Second child's first child tag name (tag_4)");              $count++;
+ok($attr_value eq 'attr_4_value_1', "Second child's first child attr value (attr_4_value_1)"); $count++;
 
 done_testing($count);
