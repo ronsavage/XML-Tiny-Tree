@@ -152,14 +152,28 @@ This is scripts/synopsis.pl:
 
 	# ------------------------------------------------
 
-	my($input_file) = shift || die "Usage $0 file\n";
+	my($input_file) = shift || die "Usage $0 file. Try using data/test.xml as the input. \n";
 	my($tree)       = XML::Tiny::Tree -> new
 						(
 							input_file        => $input_file,
 							no_entity_parsing => 1,
 						) -> convert;
 
+	print "Input file: $input_file. \n";
+	print "The whole tree: \n";
 	print map("$_\n", @{$tree -> tree2string});
+	print '-' x 50, "\n";
+	print "Bits and pieces from the first child (tag_4) of the second child (tag_3) of the root (tag_1): \n";
+
+	my(@children) = $tree -> children;
+	@children     = $children[1] -> children;
+	my($tag)      = $children[0] -> value;
+	my($meta)     = $children[0] -> meta;
+	my($attr)     = $$meta{attributes};
+
+	print "tag:        $tag. \n";
+	print "content:    $$meta{content}. \n";
+	print 'attributes: ', join(', ', map{"$_ => $$attr{$_}"} sort keys %$attr), ". \n";
 
 =head1 Description
 
@@ -175,7 +189,7 @@ C<new()> is called as C<< my($obj) = XML::Tiny::Tree -> new(k1 => v1, k2 => v2, 
 It returns a new object of type C<XML::Tiny::Tree>.
 
 Key-value pairs accepted in the parameter list (see corresponding methods for details
-[e.g. L</action([$string])>]):
+[e.g. L</input_file([$string])>]):
 
 =over 4
 
@@ -255,6 +269,8 @@ Here, the [] indicate an optional parameter.
 
 Triggers reading the XML file and conversion of the output of L<XML::Tiny> into a L<Tree>.
 
+Returns an object of type L<Tree>.
+
 C<convert()> takes the same parameters as L</new([%arg])>.
 See L</Constructor and Initialization> for details.
 
@@ -270,7 +286,7 @@ C<fatal_declarations> is a parameter to L<new([%arg])>.
 
 Here, the [] indicate an optional parameter.
 
-Gets or sets the name of the input file to read.
+Gets or sets the name of the input file to pass to L<XML::Tiny>'s method C<parsefile()>.
 
 C<input_file> is a parameter to L<new([%arg])>.
 
@@ -298,14 +314,14 @@ C<strict_entity_parsing> is a parameter to L<new([%arg])>.
 
 =head2 How to I access the names of the XML tags?
 
-Each node in the tree is an object of type L<Tree>, and has a method called C<value>. This method
+Each node in the tree is an object of type L<Tree>, and has a method called C<value()>. This method
 returns a string which is the name of the tag.
 
-See t/test.t for sample code.
+See the L</Synopsis> for sample code.
 
 =head2 How do I access the attributes of each XML tag?
 
-Each node in the tree is an object of type L<Tree>, and has a method called C<meta>. This method
+Each node in the tree is an object of type L<Tree>, and has a method called C<meta()>. This method
 returns a hashref containing 2 keys:
 
 =over 4
@@ -320,13 +336,13 @@ If the tag has no attributes, then $hashref is {}.
 
 If the tag has no content, then $string is ''.
 
-See t/test.t for sample code.
+See the L</Synopsis> for sample code.
 
 =head2 How do I access the content of each XML tag?
 
 See the answer to the previous question.
 
-See t/test.t for sample code.
+See the L</Synopsis> for sample code.
 
 =head2 Is it possible for a tag to have both content and sub-tags?
 
