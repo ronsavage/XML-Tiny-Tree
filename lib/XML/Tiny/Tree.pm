@@ -280,7 +280,7 @@ Here, the [] indicate an optional parameter.
 
 Gets or sets the value of the option to pass to L<XML::Tiny>.
 
-C<fatal_declarations> is a parameter to L<new([%arg])>.
+C<fatal_declarations> is a parameter to L</new([%arg])>.
 
 =head2 input_file([$string])
 
@@ -288,7 +288,7 @@ Here, the [] indicate an optional parameter.
 
 Gets or sets the name of the input file to pass to L<XML::Tiny>'s method C<parsefile()>.
 
-C<input_file> is a parameter to L<new([%arg])>.
+C<input_file> is a parameter to L</new([%arg])>.
 
 =head2 new([%arg])
 
@@ -300,7 +300,7 @@ Here, the [] indicate an optional parameter.
 
 Gets or sets the value of the option to pass to L<XML::Tiny>.
 
-C<no_entity_parsing> is a parameter to L<new([%arg])>.
+C<no_entity_parsing> is a parameter to L</new([%arg])>.
 
 =head2 strict_entity_parsing([$Boolean])
 
@@ -308,7 +308,7 @@ Here, the [] indicate an optional parameter.
 
 Gets or sets the value of the option to pass to L<XML::Tiny>.
 
-C<strict_entity_parsing> is a parameter to L<new([%arg])>.
+C<strict_entity_parsing> is a parameter to L</new([%arg])>.
 
 =head1 FAQ
 
